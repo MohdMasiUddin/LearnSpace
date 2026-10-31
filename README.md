@@ -151,19 +151,19 @@ Main database models:
 ## Screenshots
 
 ### Login Page
-![Login](docs/screenshots/login.png)
+![Login](docs/login.png)
 
 ### Admin Dashboard
-![Admin Dashboard](docs/screenshots/admin-dashboard.png)
+![Admin Dashboard](docs/admin-dashboard.png)
 
 ### Course Listing
-![Courses](docs/screenshots/courses.png)
+![Courses](docs/courses.png)
 
 ### Student Dashboard
-![Student Dashboard](docs/screenshots/student-dashboard.png)
+![Student Dashboard](docs/student-dashboard.png)
 
 ### Course Progress
-![Course Progress](docs/screenshots/course-progress.png)
+![Course Progress](docs/course-progress.png)
 
 ## Security
 
