@@ -34,7 +34,9 @@ type AuthResponse = {
   error?: string
 }
 
-const API_URL = 'http://localhost:5001/api'
+const API_URL = import.meta.env.PROD
+ ? 'https://learnspace-api-dd7k.onrender.com/api'
+ : 'http://localhost:5001/api';
 const TOKEN_KEY = 'learnspace_token'
 
 const categoryColors: Record<string, string> = {
