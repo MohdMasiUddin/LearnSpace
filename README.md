@@ -1,73 +1,76 @@
 # LearnSpace – Online Course Management System
 
-LearnSpace is a full-stack online course management system built as part of the **Cognevance Full Stack Development – Task 2**. It provides a platform where students can explore courses, enroll in them, track their learning progress, and manage their profiles. Administrators can manage courses through a dedicated dashboard.
+LearnSpace is a full-stack online course management platform developed as part of the **Cognevance Full Stack Web Developer Assessment – Task 2**.
+
+It provides separate student and administrator dashboards, allowing students to explore courses, enroll in them, and track their learning progress while administrators manage courses and users.
+
+## Live Demo
+
+**Website:** https://learn-space-umber.vercel.app
+
+**GitHub Repository:** https://github.com/MohdMasiUddin/LearnSpace
 
 ## Features
 
-- **User Authentication:** Student registration and login using JWT authentication and bcrypt password hashing.
-- **Role-Based Access Control:** Separate permissions for students and administrators.
-- **Course Management:** Administrators can create, update, and delete courses.
-- **Course Discovery:** Browse, search, and filter available courses.
-- **Course Enrollment:** Students can enroll in courses and view their enrolled courses.
-- **Progress Tracking:** Track course completion progress from 0% to 100%.
-- **User Profile:** View and update profile information.
-- **Student Dashboard:** View enrolled courses, completed courses, and learning progress.
-- **Admin Dashboard:** Manage courses and course information.
-- **Responsive UI:** User-friendly interface with dark and light themes.
+### Student Features
+- Student registration and login.
+- Browse available courses.
+- Search and filter courses by category.
+- Enroll in courses.
+- Track course completion progress.
+- Update profile information.
 
-## Tech Stack
+### Admin Features
+- Secure administrator login.
+- Admin dashboard.
+- Create, update, and delete courses.
+- Manage course information.
+- Role-based access control.
 
-### Frontend
-- React
-- TypeScript
-- Vite
-- CSS
+### General Features
+- Responsive user interface.
+- JWT-based authentication.
+- Password hashing.
+- RESTful API integration.
+- PostgreSQL database.
+- Form validation and error handling.
+- Dark and light mode.
 
-### Backend
-- Node.js
-- Express.js
-- TypeScript
-- JWT
-- bcryptjs
+## Technology Stack
 
-### Database
-- PostgreSQL
-- Prisma ORM
+| Component | Technologies |
+|---|---|
+| Frontend | React, TypeScript, Vite, CSS |
+| Backend | Node.js, Express.js, TypeScript |
+| Database | PostgreSQL |
+| ORM | Prisma |
+| Authentication | JWT, bcryptjs |
+| Frontend Hosting | Vercel |
+| Backend Hosting | Render |
+| Database Hosting | Neon |
 
 ## Project Structure
 
 ```text
 LearnSpace/
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   └── package.json
+│
 ├── backend/
 │   ├── prisma/
-│   │   ├── migrations/
-│   │   └── schema.prisma
+│   │   ├── schema.prisma
+│   │   └── migrations/
 │   ├── src/
-│   │   ├── lib/
-│   │   ├── middleware/
-│   │   └── server.ts
-│   ├── package.json
-│   └── prisma7.config.ts
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── App.tsx
-│   │   ├── App.css
-│   │   └── index.css
 │   └── package.json
-├── .gitignore
-└── README.md
+│
+├── API_DOCUMENTATION.md
+├── README.md
+└── .gitignore
 ```
 
-## Getting Started
-
-### Prerequisites
-
-Install the following before running the project:
-
-- Node.js and npm
-- PostgreSQL
-- Git
+## Local Installation and Setup
 
 ### 1. Clone the Repository
 
@@ -76,109 +79,106 @@ git clone https://github.com/MohdMasiUddin/LearnSpace.git
 cd LearnSpace
 ```
 
-### 2. Set Up the Backend
+### 2. Backend Setup
 
 ```bash
 cd backend
 npm install
 ```
 
-Create a `.env` file inside the `backend/` directory:
+Configure your backend `.env` file with your local PostgreSQL database connection and JWT secret.
 
-```env
-DATABASE_URL="postgresql://YOUR_USERNAME:YOUR_PASSWORD@localhost:5432/learnspace"
-JWT_SECRET="YOUR_LONG_RANDOM_SECRET"
-PORT=5001
-```
-
-Replace the database username and password with your local PostgreSQL credentials. Use a strong, randomly generated JWT secret.
-
-Create the `learnspace` database in PostgreSQL if it does not already exist.
-
-Apply the database migrations and generate the Prisma Client:
+Then run:
 
 ```bash
-npx prisma migrate deploy
 npx prisma generate
-```
-
-Start the backend development server:
-
-```bash
+npx prisma migrate deploy
 npm run dev
 ```
 
-The backend API will run at `http://localhost:5001`.
+The backend runs at:
 
-Health check endpoint:
+`http://localhost:5001`
 
-`http://localhost:5001/api/health`
+### 3. Frontend Setup
 
-### 3. Set Up the Frontend
-
-Open a new terminal from the project root:
+Open another terminal:
 
 ```bash
 cd frontend
 npm install
+```
+
+Configure `frontend/.env`:
+
+```env
+VITE_API_URL=http://localhost:5001/api
+```
+
+Start the frontend:
+
+```bash
 npm run dev
 ```
 
-Open the local URL displayed in the terminal, usually `http://localhost:5173`.
+The frontend runs at:
 
-## API Endpoints
+`http://localhost:5173`
 
-The backend exposes the following REST API endpoints.
+## API Documentation
 
-| Method | Endpoint | Description |
-|---|---|---|
-| GET | `/api/health` | Check API status |
-| POST | `/api/auth/register` | Register a student |
-| POST | `/api/auth/login` | Log in |
-| GET | `/api/auth/me` | Get the authenticated user |
-| PUT | `/api/auth/profile` | Update profile information |
-| GET | `/api/courses` | Get available courses |
-| POST | `/api/courses` | Create a course (admin only) |
-| PUT | `/api/courses/:id` | Update a course (admin only) |
-| DELETE | `/api/courses/:id` | Delete a course (admin only) |
-| POST | `/api/enrollments` | Enroll in a course |
-| GET | `/api/users/:userId/enrollments` | Get a user's enrollments |
-| PATCH | `/api/enrollments/:courseId/progress` | Update course progress |
+Detailed API endpoints, request formats, and response examples are available in:
 
-Protected endpoints require a valid JWT access token. Administrative endpoints require an authenticated administrator.
+[API_DOCUMENTATION.md](./API_DOCUMENTATION.md)
 
 ## Database Schema
 
-LearnSpace uses PostgreSQL with Prisma ORM and includes three primary models:
+The application uses PostgreSQL with Prisma ORM.
 
-- **User:** Stores user details, password hash, role, and account creation date.
-- **Course:** Stores course title, description, instructor, category, and creation date.
-- **Enrollment:** Connects users with courses and stores enrollment date and progress.
+Main database models:
+- **User:** Stores user information, authentication details, and roles.
+- **Course:** Stores course details, descriptions, instructors, and categories.
+- **Enrollment:** Stores student enrollments and course progress.
 
-The schema defines relationships between users, courses, and enrollments, with a unique constraint preventing duplicate enrollments for the same user and course.
+## Deployment
 
-## Build and Validation
+| Service | Platform |
+|---|---|
+| Frontend | Vercel |
+| Backend | Render |
+| Database | Neon PostgreSQL |
 
-Build the backend:
+## Screenshots
 
-```bash
-cd backend
-npm run build
-```
+### Login Page
+![Login](docs/screenshots/login.png)
 
-Build the frontend:
+### Admin Dashboard
+![Admin Dashboard](docs/screenshots/admin-dashboard.png)
 
-```bash
-cd frontend
-npm run build
-```
+### Course Listing
+![Courses](docs/screenshots/courses.png)
 
-## Project Links
+### Student Dashboard
+![Student Dashboard](docs/screenshots/student-dashboard.png)
 
-- **GitHub Repository:** https://github.com/MohdMasiUddin/LearnSpace
-- **Live Demo:** To be added after deployment.
-- **Screenshots:** To be added.
+### Course Progress
+![Course Progress](docs/screenshots/course-progress.png)
 
-## Security Notes
+## Security
 
-- Never commit `.env` files or
+- Passwords are hashed using bcryptjs.
+- JWT authentication protects private API routes.
+- Role-based authorization restricts administrator operations.
+- Environment variables are used for sensitive configuration.
+- Database credentials and secrets are excluded from version control.
+
+## Author
+
+**Mohd Masi Uddin**
+
+Full Stack Web Developer – Aspiring
+
+---
+
+Developed as part of the Cognevance Full Stack Web Developer Assessment.
